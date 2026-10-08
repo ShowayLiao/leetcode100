@@ -1,0 +1,18 @@
+# 收藏与二刷清单
+
+记录值得复习的题目。二刷次数从 `0` 开始，每完成一次二刷后递增。
+
+| 收藏日期 | 题目与复习入口 | 收藏原因 | 二刷次数 |
+|---|---|---|---:|
+| 2026-09-07 | [230. 二叉搜索树中第 K 小的元素](../problems/hot100/36_0230_kth_smallest_element_in_a_bst/problem.md) · [代码](../problems/hot100/36_0230_kth_smallest_element_in_a_bst/main.py) · [笔记](../problems/hot100/36_0230_kth_smallest_element_in_a_bst/notes.md) | 二叉树构建、搜索的例题；通过层序数组和 `null` 占位构建二叉树，再利用二叉搜索树中序遍历有序的性质查找第 `k` 小元素 | 0 |
+| 2026-09-06 | [3. 无重复字符的最长子串](../problems/hot100/09_0003_longest_substring_without_repeating_characters/problem.md) · [代码](../problems/hot100/09_0003_longest_substring_without_repeating_characters/main.py) · [笔记](../problems/hot100/09_0003_longest_substring_without_repeating_characters/notes.md) | 滑动窗口管理案例：重复字符出现时从左侧收缩窗口；理解嵌套 `for` 与 `while` 中每个字符最多进出窗口一次，因此整体仍为 `O(n)` | 0 |
+| 2026-09-06 | [283. 移动零](../problems/hot100/07_0283_move_zeroes/problem.md) · [代码](../problems/hot100/07_0283_move_zeroes/main.py) · [笔记](../problems/hot100/07_0283_move_zeroes/notes.md) | 原地修改数组；用双指针让非零元素向前填充，剩余位置补 `0`，保持非零元素的相对顺序 | 0 |
+| 2026-09-04 | [42. 接雨水](../problems/hot100/05_0042_trapping_rain_water/problem.md) · [代码](../problems/hot100/05_0042_trapping_rain_water/main.py) · [笔记](../problems/hot100/05_0042_trapping_rain_water/notes.md) | 当前位置积水公式：`min(left_max, right_max) - height[i]`；动态规划的前后缀最高值，以及双指针中“较矮一侧可以安全结算”的不变量 | 0 |
+| 2026-09-03 | [15. 三数之和](../problems/leetcode/0015_3sum/problem.md) · [代码](../problems/leetcode/0015_3sum/main.py) · [笔记](../problems/leetcode/0015_3sum/notes.md) | 关键词：三元数和的常规写法；排序、固定一个数、双指针与去重；找到答案后左右指针都移动，再跳过重复值 | 0 |
+| 2026-09-03 | [49. 字母异位词分组](../problems/hot100/02_0049_group_anagrams/problem.md) · [代码](../problems/hot100/02_0049_group_anagrams/main.py) · [笔记](../problems/hot100/02_0049_group_anagrams/notes.md) | 哈希表与 Python 字典的相关实现；为字母异位词构造稳定、唯一的分组 key | 0 |
+| 2026-09-02 | [14. 最长公共前缀](../problems/leetcode/0014_longest_common_prefix/problem.md) · [代码](../problems/leetcode/0014_longest_common_prefix/main.py) · [笔记](../problems/leetcode/0014_longest_common_prefix/notes.md) | `any()` 的短路判断与生成器表达式；按列比较时遇到长度不足或字符不匹配立即 `return`，避免 `break` 后重复输出 | 0 |
+| 2026-09-01 | [11. 盛最多水的容器](../problems/leetcode/0011_container_with_most_water/problem.md) · [代码](../problems/leetcode/0011_container_with_most_water/main.py) · [笔记](../problems/leetcode/0011_container_with_most_water/notes.md) | 双指针中的贪心：根据短板证明一侧可以安全删除；适合复习“局部选择如何保证全局最优” | 0 |
+| 2026-08-31 | [8. 字符串转换整数（atoi）](../problems/leetcode/0008_string_to_integer_atoi/problem.md) · [代码](../problems/leetcode/0008_string_to_integer_atoi/main.py) · [笔记](../problems/leetcode/0008_string_to_integer_atoi/notes.md) | 单遍解析：`strip()` 跳空格、`if s[index] in "+-"` 读符号；统一极限值 `2147483647 + (sign==-1)` 一次 `min` 同时处理正负溢出（负数幅度可达 2147483648） | 0 |
+| 2026-08-31 | [9. 回文数](../problems/leetcode/0009_palindrome_number/problem.md) · [代码](../problems/leetcode/0009_palindrome_number/main.py) · [笔记](../problems/leetcode/0009_palindrome_number/notes.md) | 对撞双指针标准用法：`while left <= right` 作终止条件、不匹配即 `return`、`left+=1; right-=1` 双向收拢；负数先判 `x<0` 直接 false（勿用 `abs()`）；空数组/单元素天然安全 | 0 |
+| 2026-08-29 | [6. Z 字形变换](../problems/leetcode/0006_zigzag_conversion/problem.md) · [代码](../problems/leetcode/0006_zigzag_conversion/main.py) · [笔记](../problems/leetcode/0006_zigzag_conversion/notes.md) | Z 字形行号往返、边界处理与按行拼接输出 | 0 |
+| 2026-08-28 | [3. 无重复字符的最长子串](../problems/leetcode/0003_longest_substring_without_repeating_characters/problem.md) · [代码](../problems/leetcode/0003_longest_substring_without_repeating_characters/main.py) · [笔记](../problems/leetcode/0003_longest_substring_without_repeating_characters/notes.md) | 滑动窗口不变量、集合查重与收缩时删除 `s[left]` | 0 |
