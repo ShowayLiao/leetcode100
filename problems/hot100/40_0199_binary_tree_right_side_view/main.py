@@ -11,8 +11,7 @@ class TreeNode:
 
 def build_tree(data:list)->TreeNode:
 
-    if not data:
-
+    if data is None:
         return
 
     root = TreeNode(int(data[0]))
@@ -21,21 +20,26 @@ def build_tree(data:list)->TreeNode:
 
     index = 1
 
+
     while index<len(data) and queue:
 
         node = queue.popleft()
 
         if data[index]!=b"null":
+
             node.left = TreeNode(int(data[index]))
             queue.append(node.left)
 
         index+=1
 
+
         if index<len(data) and data[index]!=b"null":
+
             node.right = TreeNode(int(data[index]))
             queue.append(node.right)
 
         index+=1
+
 
     return root
 
@@ -47,14 +51,13 @@ def solve()->None:
     if not data:
         return
 
-
     n = int(data[0])
 
     root = build_tree(data[1:])
 
     queue = deque([root])
 
-    out = []
+    ans = []
 
     while queue:
 
@@ -65,7 +68,7 @@ def solve()->None:
             node = queue.popleft()
 
             if i == level_size-1:
-                out.append(node.val)
+                ans.append(node.val)
 
             if node.left:
                 queue.append(node.left)
@@ -74,11 +77,13 @@ def solve()->None:
                 queue.append(node.right)
 
 
-    print(*out)
+    print(*ans)
 
     
 
 
 if __name__ == "__main__":
+
+
     solve()
 

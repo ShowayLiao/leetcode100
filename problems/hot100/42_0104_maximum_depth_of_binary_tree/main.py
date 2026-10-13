@@ -75,8 +75,8 @@ def solve() -> None:
                 queue.append(node.right)
 
 
-
     print(depth)
+
 
 
 

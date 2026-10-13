@@ -51,10 +51,6 @@ def solve()->None:
 
     n = int(data[0])
 
-    if n==0:
-        print([])
-        return
-
     root = build_tree(data[1:])
 
     queue = deque([root])
@@ -77,8 +73,12 @@ def solve()->None:
             if node.right:
                 queue.append(node.right)
 
+
         print(*out)
 
+    
+
+    
 
 
     

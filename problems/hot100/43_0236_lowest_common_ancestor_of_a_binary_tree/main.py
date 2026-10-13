@@ -70,9 +70,10 @@ def solve() -> None:
             continue
 
         if not visit:
+
             stack.append((node,True))
-            stack.append((node.left,False))
             stack.append((node.right,False))
+            stack.append((node.left,False))
 
         else:
 
@@ -80,7 +81,7 @@ def solve() -> None:
             right_p,right_q = found.get(node.right,(0,0))
 
             found_p = left_p or right_p or node.val==p
-            found_q = left_q or right_q or node.val==q
+            found_q = right_q or left_q or node.val==q
 
             if found_p and found_q:
                 print(node.val)
