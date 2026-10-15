@@ -30,34 +30,44 @@ def solve() -> None:
 
     head = build_node(data[1:])
 
-    if n == 0:
+    if n==0:
         print("empty")
         return
 
-    if n == 1:
+
+    if n==1:
         print(head.val)
-        return 
+        return
+
 
     pre = None
+
     cur = head
 
-
     while cur:
+
         nxt = cur.next
         cur.next = pre
         pre = cur
         cur = nxt
 
-    cur = pre
+    head = pre
 
-    ans = []
+
+    cur = head
+
+
+    out = []
 
     while cur:
 
-        ans.append(cur.val)
+        out.append(cur.val)
         cur = cur.next
 
-    print(*ans)
+
+    print(*out)
+
+    
 
 
 

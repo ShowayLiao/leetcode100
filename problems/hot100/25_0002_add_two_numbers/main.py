@@ -37,40 +37,34 @@ def solve() -> None:
 
     head2 = build_node(data[2+n1:])
 
-    cur1 = head1
-
-    cur2 = head2
-
     carry = 0
 
-    ans = []
+    cur1,cur2 = head1,head2
+
+    out = []
 
     while cur1 or cur2 or carry:
 
         total = carry
 
         if cur1:
-
             total+=cur1.val
-
             cur1 = cur1.next
 
         if cur2:
-
             total+=cur2.val
-
             cur2 = cur2.next
 
         
-        ans.append(total%10)
+        out.append(total%10)
 
         carry = total//10
 
-    while len(ans)>1 and ans[-1]==0:
-        ans.pop()
 
-    print(*ans)
+    while len(out)>1 and out[-1]==0:
+        out.pop()
 
+    print(*out)
 
 
 

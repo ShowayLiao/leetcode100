@@ -30,41 +30,51 @@ def solve() -> None:
 
     n = int(data[1])
 
+    if n==0:
+        print("empty")
+        return
+
     head = build_node(data[2:])
 
     dummy = Node(0)
 
     dummy.next = head
 
-    fast = dummy
 
     slow = dummy
+
+    fast = dummy
+
 
     for _ in range(n):
 
         fast = fast.next
 
+
     while fast:
-        fast = fast.next
+
         pre = slow
         slow = slow.next
+        fast = fast.next
 
     pre.next = slow.next
 
-    cur = dummy.next # 这里要为dummy.next，否则移除head时会出现问题
+
+    cur = dummy.next
 
     if cur is None:
+
         print("empty")
+
         return
 
-    ans = []
+    out = []
 
     while cur:
-
-        ans.append(cur.val)
+        out.append(cur.val)
         cur = cur.next
 
-    print(*ans)
+    print(*out)
 
 
     

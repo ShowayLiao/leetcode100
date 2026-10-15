@@ -9,16 +9,16 @@ class TreeNode:
         self.left = None
         self.right = None
 
-def build_tree(data_p:list,data_i:list,n:int)->TreeNode:
+def build_tree(pdata:list,idata:list,n:int)->TreeNode:
+
+    if not pdata or not idata:
+        return
 
     root = None
 
-    if not data_p or not data_i:
-        return root
-
-    i_pos = {int(value):i for i,value in enumerate(data_i)}
-
     stack = [(0,n,0,n,None,None)]
+
+    i_pos = {int(value):i for i,value in enumerate(idata)}
 
     while stack:
 
@@ -27,7 +27,7 @@ def build_tree(data_p:list,data_i:list,n:int)->TreeNode:
         if pl>=pr:
             continue
 
-        node = TreeNode(int(data_p[pl]))
+        node = TreeNode(int(pdata[pl]))
 
         if parent is None:
             root = node
@@ -41,21 +41,13 @@ def build_tree(data_p:list,data_i:list,n:int)->TreeNode:
 
         mid = i_pos[node.val]
 
-        left_size = mid - il
+        left_n = mid-il
 
-        stack.append((
-            pl+1+left_size,pr,
-            mid+1,ir,
-            node,"right"
-        ))
+        stack.append((pl+1,pl+1+left_n,il,mid,node,"left"))
+        stack.append((pl+1+left_n,pr,mid+1,ir,node,"right"))
 
-        stack.append((
-            pl+1,pl+1+left_size,
-            il,il+left_size,
-            node,"left"
-        ))
 
-    return root
+    return root 
 
 
 def solve()->None:
@@ -77,14 +69,19 @@ def solve()->None:
 
         level_size = len(queue)
 
-        for i in range(level_size):
-            node = queue.popleft()
+        for _ in range(level_size):
 
-            if node is None:
+            node  = queue.popleft()
+
+            if node:
+
+                out.append(node.val)
+
+            else:
+
                 out.append("null")
                 continue
-            else:
-                out.append(node.val)
+
 
             queue.append(node.left)
             queue.append(node.right)
@@ -92,8 +89,13 @@ def solve()->None:
 
     while out and out[-1]=="null":
         out.pop()
+    
 
     print(*out)
+
+
+
+    
 
 
 if __name__ == "__main__":

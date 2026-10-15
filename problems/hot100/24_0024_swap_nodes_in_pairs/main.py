@@ -6,16 +6,18 @@ class Node:
         self.next = None
 
 
-def build_tree(data:list)->Node:
 
-    if data is None:
+def build_node(data:list)->None:
+
+    if not data:
         return
 
     dummy = Node(0)
 
     cur = dummy
 
-    for _,d in  enumerate(data):
+    for _,d in enumerate(data):
+
         cur.next = Node(int(d))
         cur = cur.next
 
@@ -25,58 +27,60 @@ def build_tree(data:list)->Node:
 def reverse_two(head:Node)->Node:
 
     dummy = Node(0)
+
     dummy.next = head
+
     pre_tail = dummy
 
-    while 1:
+    while pre_tail.next:
 
-        
         cur = pre_tail.next
 
         for _ in range(2):
             if cur is None:
                 return dummy.next
+
             cur = cur.next
 
-        next_head = cur
+        nxt_head = cur
+
+        pre = nxt_head
 
         cur = pre_tail.next
 
-        old_head = pre_tail.next
-
-        pre = next_head
+        old_head = cur
 
         for _ in range(2):
 
             nxt = cur.next
+
             cur.next = pre
+
             pre = cur
+
             cur = nxt
 
         pre_tail.next = pre
+
         pre_tail = old_head
 
-
-        
-
-    
+    return dummy.next
 
 
+def solve()->None:
 
-
-def solve() -> None:
     data = sys.stdin.buffer.read().split()
+
     if not data:
-        return
-    # TODO: implement the ACM-style solution.
+        return 
 
     n = int(data[0])
 
-    if n == 0:
+    if n==0:
         print("empty")
         return
 
-    head = build_tree(data[1:])
+    head = build_node(data[1:])
 
     head = reverse_two(head)
 
@@ -85,12 +89,16 @@ def solve() -> None:
     out = []
 
     while cur:
+
         out.append(cur.val)
         cur = cur.next
 
+
     print(*out)
 
-    
 
-if __name__ == "__main__":
+
+
+if __name__ =="__main__":
+
     solve()

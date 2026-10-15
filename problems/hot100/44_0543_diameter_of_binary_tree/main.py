@@ -9,38 +9,37 @@ class TreeNode:
         self.right = None
 
 
-def build_tree(vals:list)->TreeNode:
+def build_tree(data:list)->TreeNode:
 
-    root = None
+    if not data:
+        return
 
-    if not vals or vals[0]==b"null":
-        return root
-
-    root = TreeNode(int(vals[0]))
+    root = TreeNode(int(data[0]))
 
     queue = deque([root])
 
     index = 1
 
-    while index < len(vals) and queue:
+    while index<len(data) and queue:
 
         node = queue.popleft()
 
-        if vals[index]!=b"null":
-            node.left = TreeNode(int(vals[index]))
+        if data[index]!=b"null":
+
+            node.left = TreeNode(int(data[index]))
             queue.append(node.left)
 
         index+=1
 
-        if index<len(vals) and vals[index]!=b"null":
-            node.right = TreeNode(int(vals[index]))
+
+        if index<len(data) and data[index]!=b"null":
+
+            node.right = TreeNode(int(data[index]))
             queue.append(node.right)
 
         index+=1
 
     return root
-
-
 
 
 def solve()->None:
@@ -54,14 +53,6 @@ def solve()->None:
 
     root = build_tree(data[1:])
 
-    if n==1:
-        print(0)
-        return
-
-    if n==2:
-        print(1)
-        return
-
     stack = [(root,False)]
 
     lenth = {}
@@ -73,9 +64,7 @@ def solve()->None:
         node,visit = stack.pop()
 
         if node is None:
-
             continue
-
 
         if not visit:
 
@@ -92,7 +81,10 @@ def solve()->None:
 
             lenth[node] = max(left+1,right+1)
 
+
     print(ans)
+
+            
     
 
 
