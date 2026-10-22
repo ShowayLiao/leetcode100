@@ -62,7 +62,9 @@ def solve() -> None:
         print("true")
         return
 
-    stack = [(root,False)]
+    stack = [
+        (root,False)
+    ]
 
     pre = None
 
@@ -76,7 +78,9 @@ def solve() -> None:
         if not visit:
 
             stack.append((node.right,False))
+
             stack.append((node,True))
+
             stack.append((node.left,False))
 
         else:
@@ -86,7 +90,6 @@ def solve() -> None:
                 return
 
             pre = node
-
 
     print("true")
 

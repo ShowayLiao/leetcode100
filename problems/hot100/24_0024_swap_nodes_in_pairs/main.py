@@ -6,23 +6,21 @@ class Node:
         self.next = None
 
 
-
-def build_node(data:list)->None:
+def build_node(data:list)->Node:
 
     if not data:
         return
 
     dummy = Node(0)
 
-    cur = dummy
+    cur =dummy
 
-    for _,d in enumerate(data):
+    for d in data:
 
         cur.next = Node(int(d))
         cur = cur.next
 
     return dummy.next
-
 
 def reverse_two(head:Node)->Node:
 
@@ -30,41 +28,41 @@ def reverse_two(head:Node)->Node:
 
     dummy.next = head
 
-    pre_tail = dummy
+    a = head
 
-    while pre_tail.next:
+    b = head.next
 
-        cur = pre_tail.next
+    if b is None:
+        return dummy.next
 
-        for _ in range(2):
-            if cur is None:
-                return dummy.next
+    pre = dummy
 
-            cur = cur.next
+    while b:
 
-        nxt_head = cur
+        nxt = b.next
 
-        pre = nxt_head
+        b.next = a
 
-        cur = pre_tail.next
+        a.next = nxt
 
-        old_head = cur
+        pre.next = b
 
-        for _ in range(2):
+        pre = a
 
-            nxt = cur.next
+        a = nxt
 
-            cur.next = pre
+        b = nxt.next if nxt else None
 
-            pre = cur
+        
 
-            cur = nxt
 
-        pre_tail.next = pre
 
-        pre_tail = old_head
+
 
     return dummy.next
+
+
+
 
 
 def solve()->None:
@@ -72,29 +70,34 @@ def solve()->None:
     data = sys.stdin.buffer.read().split()
 
     if not data:
-        return 
-
-    n = int(data[0])
-
-    if n==0:
-        print("empty")
         return
 
     head = build_node(data[1:])
 
+    if head is None:
+        print("empty")
+        return
+
     head = reverse_two(head)
 
-    cur = head
+    cur =head
 
     out = []
 
     while cur:
-
         out.append(cur.val)
         cur = cur.next
 
+    if out:
+        print(*out)
 
-    print(*out)
+    else:
+        print("empty")
+
+    
+
+    
+     
 
 
 

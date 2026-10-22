@@ -62,26 +62,32 @@ def solve() -> None:
         print(root.val)
         return
 
+
     stack = [(root,False)]
+
 
     while stack:
 
         node,visit = stack.pop()
 
         if node is None:
-
             continue
+
 
         if not visit:
 
-            stack.append((node,True))
+            stack.append((node,True))   
             stack.append((node.right,False))
             stack.append((node.left,False))
+
 
         else:
 
             node.left,node.right = node.right,node.left
 
+            
+
+    
 
     queue = deque([root])
 

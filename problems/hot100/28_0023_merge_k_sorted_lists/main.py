@@ -1,12 +1,13 @@
 import sys
 import heapq
 
-
 class Node:
 
-    def __init__(self,val):
-        self.val = val  
+    def __init__(self,val:int):
+        self.val = val
+
         self.next = None
+
 
 
 def build_node(data:list)->Node:
@@ -18,23 +19,24 @@ def build_node(data:list)->Node:
 
     cur =dummy
 
-    for _,d in enumerate(data):
+
+    for d in data:
+
         cur.next = Node(int(d))
         cur = cur.next
 
 
     return dummy.next
 
-
 def merge_two(a:Node,b:Node)->Node:
 
     dummy = Node(0)
 
-    cur =dummy
+    cur = dummy
 
     while a and b:
 
-        if a.val < b.val:
+        if a.val<b.val:
             cur.next = a
             a = a.next
 
@@ -49,19 +51,27 @@ def merge_two(a:Node,b:Node)->Node:
     return dummy.next
 
 
+
 def merge(heads:list,left:int,right:int)->Node:
+
+    if left>right:
+        return
 
     if left==right:
         return heads[left]
 
+
     mid = (left+right)//2
+
 
     a = merge(heads,left,mid)
 
     b = merge(heads,mid+1,right)
 
-
     return merge_two(a,b)
+
+
+
 
 
 def solve(h:bool=False)->None:
@@ -73,15 +83,13 @@ def solve(h:bool=False)->None:
 
     k = int(data[0])
 
-    if k==0:
-        print("empty")
-        return
-
     pos = 1
 
     heads = []
 
     heap = []
+
+    out = []
 
     for i in range(k):
 
@@ -91,47 +99,38 @@ def solve(h:bool=False)->None:
 
         node = build_node(data[pos:pos+n])
 
-        heads.append(node)
-
         if node:
+
+            heads.append(node)
+
             heap.append((node.val,i,node))
 
         pos+=n
 
-    dummy = Node(0)
-    
-    cur = dummy
 
     if h:
-
         heapq.heapify(heap)
 
-        
-
         while heap:
-
             _,i,node = heapq.heappop(heap)
 
-            cur.next = node
+            out.append(node.val)
 
-            cur = cur.next
+            nxt = node.next
 
-            if cur.next:
-
-                nxt = cur.next
+            if nxt:
                 heapq.heappush(heap,(nxt.val,i,nxt))
 
     else:
 
-        dummy.next = merge(heads,0,k-1)
+        head = merge(heads,0,len(heads)-1)
 
-    cur = dummy.next
+        cur = head
 
-    out = []
+        while cur :
+            out.append(cur.val)
 
-    while cur:
-        out.append(cur.val)
-        cur = cur.next
+            cur = cur.next
 
     if out:
         print(*out)
@@ -140,6 +139,9 @@ def solve(h:bool=False)->None:
         print("empty")
 
 
-if __name__ =="__main__":
 
-    solve(0)
+
+
+
+if __name__ == "__main__":
+    solve(1)

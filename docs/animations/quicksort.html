@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>三路快排 · 跟着指针走</title>
+<style>
+:root{--bg:#eef4fa;--ink:#173455;--teal:#087f79;--gold:#a46a05;--purple:#7555aa;--line:#d4e0eb;--muted:#526b83;--white:#fff;--duration:380ms}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 'Microsoft YaHei','PingFang SC',sans-serif}main{max-width:1440px;margin:auto;padding:30px 32px 55px}header{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:25px}h1{font-size:32px;letter-spacing:-1px;margin:0}h2{font-size:17px;margin:0 0 12px}p{margin:5px 0}small,.muted{color:var(--muted)}.eyebrow{font:12px Consolas,monospace;letter-spacing:2px;color:var(--teal)}.badge{border:1px solid var(--line);padding:6px 12px;border-radius:20px;white-space:nowrap}.panel{background:white;border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:0 4px 16px #17345505}.setup{margin-bottom:20px}.inputrow,.controls,.presets,.legend{display:flex;align-items:center;flex-wrap:wrap;gap:10px}input[type=text]{flex:1;min-width:200px;padding:11px 13px;border:1px solid #b8cadb;border-radius:7px;color:var(--ink);font:16px Consolas,monospace}button,select{font:inherit;color:var(--ink);background:#f4f8fc;border:1px solid #c6d6e4;border-radius:7px;padding:8px 14px;cursor:pointer}button:hover{background:#e3edf7}button:disabled{opacity:.42;cursor:default}.primary{background:var(--ink);color:white;border-color:var(--ink)}.primary:hover{background:#28527c}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #48a5cd;outline-offset:3px}.presets{margin-top:12px}.presets button{font-size:13px;padding:4px 10px;background:white}.error{color:#b03242;min-height:24px;font-size:13px}.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(380px,1fr);gap:20px;align-items:start}.topline{display:flex;justify-content:space-between;gap:12px;align-items:center}.metric{font:14px Consolas,monospace;color:var(--muted)}.legend{font-size:12px;margin-top:10px;gap:14px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.less{background:#d5f1ea;color:#07675f}.equal{background:#fff0ca;color:#825400}.unknown{background:#e4edf6;color:var(--ink)}.greater{background:#ece3fa;color:#684599}.outside{background:#f1f4f7;color:#718395}.canvas-scroll{overflow-x:auto;padding:4px 0}.track{height:218px;position:relative;min-width:300px;margin-top:12px;border-bottom:1px solid var(--line)}.tile{position:absolute;top:70px;left:0;width:48px;height:62px;display:flex;align-items:center;justify-content:center;border:2px solid transparent;border-radius:9px;font:bold 21px Consolas,monospace;transition:transform var(--duration) ease,background var(--duration);z-index:2}.tile small{position:absolute;bottom:-26px;font:11px Consolas,monospace;color:var(--muted)}.tile.scanning{border-color:var(--ink);box-shadow:0 0 0 4px #17345510}.tile.swapping{top:57px;box-shadow:0 6px 0 #17345513;z-index:3}.slotlabel{position:absolute;top:177px;width:54px;text-align:center;font:11px Consolas,monospace;color:var(--muted)}.pointer{position:absolute;top:12px;transform:translateX(-50%);font:11px Consolas,monospace;white-space:nowrap;text-align:center;color:var(--ink);z-index:5}.pointer b{display:block;background:var(--ink);color:white;border-radius:4px;padding:2px 6px}.pointer:after{content:'↓';font-size:18px}.boundary{position:absolute;top:151px;text-align:center;font:11px Consolas,monospace;color:var(--muted)}.status{min-height:120px;background:#f1f6fb;border-left:4px solid var(--teal);padding:16px 18px;margin:16px 0;border-radius:0 8px 8px 0}.status h2{margin:0 0 5px;color:var(--teal)}.status p{font-size:14px}.vars{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;margin-top:15px}.var{border:1px solid var(--line);border-radius:6px;text-align:center;padding:6px 2px;font:12px Consolas,monospace}.var strong{display:block;font-size:19px}.controls{margin:18px 0 8px}.controls button{padding:8px 12px}input[type=range]{accent-color:var(--teal)}#seek{width:100%;margin:12px 0 0}label{font-size:13px}.codebox{padding:18px 0 12px;overflow:hidden}.codebox h2,.codebox>.muted{margin-left:20px;margin-right:20px}.code{overflow-x:auto;padding:7px 0 12px;font:12px/1.9 Consolas,'Microsoft YaHei',monospace}.code-line{padding:0 14px 0 8px;white-space:pre;border-left:3px solid transparent}.code-line.active{background:#fff0ca;border-left-color:var(--gold)}.lineno{display:inline-block;width:25px;color:#8194a6;user-select:none}.stack{margin-top:18px}.frame{padding:9px 12px;border:1px solid var(--line);border-left:3px solid #b9cad9;border-radius:5px;margin:7px 0;font-size:13px}.frame.active{border-left-color:var(--teal);background:#edf8f5}.frame small{display:block}.notes{margin-top:20px}.notes summary{cursor:pointer;font-weight:bold}.notes p{font-size:14px;margin-top:12px}.finish{color:var(--teal)}footer{margin-top:20px;font-size:12px;color:var(--muted)}@media(max-width:1050px){.layout{grid-template-columns:1fr}.code{font-size:13px}.status{min-height:100px}}@media(max-width:600px){main{padding:20px 12px}header{align-items:start}.badge{display:none}h1{font-size:27px}.panel{padding:16px}.codebox{padding:16px 0}.vars{grid-template-columns:repeat(3,1fr)}.controls{gap:7px}.controls button{padding:8px 9px}}@media(prefers-reduced-motion:reduce){.tile{transition:none}}
+</style>
+</head>
+<body><main>
+<header><div><div class="eyebrow">QUICKSORT / THREE-WAY PARTITION</div><h1>跟着指针走，读懂三路快排</h1><p class="muted">先分类，再排序。每一次交换，都能回到上一步。</p></div><span class="badge">对应 Python 第 7–32 行</span></header>
+<section class="panel setup" aria-label="设置数组"><label for="arrayInput">输入 1–24 个整数，用空格或逗号分隔（范围 −999999 至 999999）</label><form id="arrayForm" class="inputrow"><input id="arrayInput" type="text" value="5, 2, 9, 1, 5, 6" autocomplete="off" spellcheck="false"><button class="primary" type="submit">载入数组</button></form><div class="presets"><span class="muted">试一试</span><button data-values="5,2,9,1,5,6">重复值</button><button data-values="3,1,2">右侧换入后再检查</button><button data-values="7,7,7,7,7,7">全相等</button><button data-values="1,2,3,4,5,6,7,8">已升序</button><button data-values="8,7,6,5,4,3,2,1">逆序</button><button data-values="-4,2,-1,0,-4,3">负数</button><button data-values="1">单元素</button></div><div id="error" class="error" role="alert"></div></section>
+<div class="layout"><div><section class="panel"><div class="topline"><h2>分区现场</h2><span id="counter" class="metric"></span></div><div class="legend"><span><i class="dot less"></i>小于基准</span><span><i class="dot equal"></i>等于基准</span><span><i class="dot unknown"></i>尚未检查</span><span><i class="dot greater"></i>大于基准</span><span><i class="dot outside"></i>当前区间之外</span></div><div class="canvas-scroll"><div id="track" class="track" aria-label="数组及分区指针"></div></div><p class="muted" style="font-size:12px">卡片下方 # 表示元素身份，底部数字为数组下标；重复值也能追踪。深色边框标记 current。</p><div id="vars" class="vars"></div><div class="status" aria-live="polite" aria-atomic="true"><h2 id="stepTitle"></h2><p id="explanation"></p></div><div class="controls"><button id="prev">← 上一步</button><button id="play" class="primary">▶ 自动播放</button><button id="next">下一步 →</button><button id="reset">重置</button><label for="speed">速度</label><select id="speed"><option value="1800">慢速</option><option value="1000" selected>正常</option><option value="500">快速</option></select></div><label for="seek" class="muted">拖动时间轴回看任意一步 · 空格播放 / 暂停，方向键步进</label><input id="seek" type="range" min="0" value="0" aria-label="动画步骤"></section>
+<section class="panel stack"><div class="topline"><h2>调用栈与当前区间</h2><span id="depth" class="metric"></span></div><div id="stack"></div><p class="muted" style="font-size:12px">栈向下增长。递归会新增一层；更新 left / right 只是留在同一层继续循环。</p></section>
+<details class="panel notes" open><summary>读这段代码时，记住三件事</summary><p><b>右侧换入后 current 不动：</b>nums[greater] 原本属于未知区域，换过来的值必须重新检查。</p><p><b>左侧换入后 current 可以前进：</b>less &lt; current 时，nums[less] 已知等于基准；两指针相同时只是自身交换。</p><p><b>基准是保存的值：</b>代码选中间位置的元素值，它不一定是中位数。分区平均耗时 O(n)，整体平均 O(n log n)、最坏 O(n²)；短段递归让栈空间保持 O(log n)。</p></details></div>
+<section class="panel codebox"><h2>正在执行的 Python</h2><p class="muted" style="font-size:12px">高亮行对应本步操作；交换与指针更新分开显示。</p><div id="code" class="code" aria-label="Python 源代码"></div></section></div>
+<footer>本地交互教学页 · 无外部依赖 · 轨迹遵循 problems/leetcode/0912_sort_an_array/main.py 的算法</footer>
+</main>
+<script id="engine">
+'use strict';
+function parseArray(text){
+ const parts=text.trim().split(/[\s,，]+/);
+ if(!text.trim() || parts.length>24 || parts.some(p=>! /^-?\d+$/.test(p))) throw Error('请输入 1–24 个整数，用空格或逗号分隔。');
+ const values=parts.map(Number);
+ if(values.some(n=>!Number.isSafeInteger(n)||Math.abs(n)>999999)) throw Error('每个整数须在 −999999 至 999999 之间。');
+ return values;
+}
+function buildTrace(values){
+ const items=values.map((value,id)=>({value,id})); const trace=[]; const stack=[];
+ let state={left:0,right:items.length-1,less:null,current:null,greater:null,pivot:null,valid:false};
+ let comparisons=0,swaps=0;
+ function emit(kind,title,text,lines=[],pair=[]){trace.push({...state,items:items.map(x=>({...x})),stack:stack.map(x=>({...x})),kind,title,text,lines,pair,comparisons,swaps});}
+ function sort(left,right){
+  const frame={left,right}; stack.push(frame);
+  state={left,right,less:null,current:null,greater:null,pivot:null,valid:false};
+  emit('enter','进入 sort('+left+', '+right+')',left<right?'先检查区间长度，再选取基准。':'区间长度不足 2，无需分区，直接返回。',[7,8]);
+  while(left<right){
+   const pivot=items[Math.floor((left+right)/2)].value;
+   state={left,right,less:left,current:left,greater:right,pivot,valid:true};
+   emit('pivot','保存基准值 pivot = '+pivot,'取中间下标 '+Math.floor((left+right)/2)+' 的值。less 和 current 从左端出发，greater 从右端出发。',[9,10,11,12]);
+   while(state.current<=state.greater){
+    const value=items[state.current].value; comparisons++;
+    const relation=value<pivot?'小于':value>pivot?'大于':'等于';
+    emit('compare','检查 '+value+'：'+relation+'基准 '+pivot,'未知区域为 ['+state.current+', '+state.greater+']，本次检查下标 '+state.current+'。',[14,value<pivot?15:value>pivot?19:22]);
+    if(value<pivot){
+     const a=state.less,b=state.current; [items[a],items[b]]=[items[b],items[a]]; swaps++;
+     state.valid=false;
+     emit('swap-left','交换 current 与 less',a===b?'两指针重合，这是一次自身交换。接下来扩大“小于”区域。':'把较小值放到 less；换入 current 的值来自“等于”区域，已知等于基准。',[16],[a,b]);
+     state.less++;state.current++;state.valid=true;
+     emit('advance-left','less 和 current 都右移','小于区域增加一个元素；换入元素无需重新检查，继续扫描下一个位置。',[17,18]);
+    }else if(value>pivot){
+     const a=state.current,b=state.greater;[items[a],items[b]]=[items[b],items[a]];swaps++;
+     state.valid=false;
+     emit('swap-right','交换 current 与 greater',a===b?'两指针重合，是自身交换。随后缩小未知区域。':'把较大值送到右侧。换入 current 的元素尚未检查，不能跳过。',[20],[a,b]);
+     state.greater--;state.valid=true;
+     emit('advance-right','greater 左移，current 不动','右侧“大于”区域扩大。current 留在原地，下一轮检查刚换进来的值。',[21]);
+    }else{
+     state.current++;
+     emit('advance-equal','等于基准，current 右移','无需交换，直接扩大“等于”区域。',[22,23]);
+    }
+   }
+   const less=state.less,greater=state.greater;
+   emit('partition','分区完成：未知区域已经为空','左段 ['+left+', '+(less-1)+']；相等段 ['+less+', '+greater+']；右段 ['+(greater+1)+', '+right+']。中间段不再参与递归。',[14]);
+   const saved={...state}; const shortLeft=less-left<right-greater;
+   emit('choose','选择较短区间递归','左段长 '+(less-left)+'，右段长 '+(right-greater)+'。先递归'+(shortLeft?'左':'右')+'段，长段留在本层用循环处理。',[25]);
+   emit('call','调用较短的'+(shortLeft?'左':'右')+'段','即将新增一层调用栈。短段可能为空，空区间会立即返回。',[shortLeft?26:29]);
+   if(shortLeft) sort(left,less-1); else sort(greater+1,right);
+   state=saved;
+   emit('resume','短段返回，回到上一层','短段已处理完毕，下一步修改本层边界，继续处理较长区间。',[shortLeft?26:29]);
+   if(shortLeft) left=greater+1; else right=less-1;
+   frame.left=left;frame.right=right;
+   state={left,right,less:null,current:null,greater:null,pivot:null,valid:false};
+   emit('loop','同一层继续：更新 '+(shortLeft?'left':'right'),'接下来处理 ['+left+', '+right+']。没有新增递归层；若长度不足 2，循环结束。',[shortLeft?27:30,8]);
+  }
+  emit('return','当前调用结束','区间 ['+left+', '+right+'] 无需继续分区，返回调用它的上一层。',[8]);
+  stack.pop();
+ }
+ emit('start','准备开始','点击“下一步”观察执行，或自动播放。每个元素会保留自己的身份编号。',[32]);
+ sort(0,items.length-1);
+ state={left:0,right:items.length-1,less:null,current:null,greater:null,pivot:null,valid:false};
+ emit('done','排序完成','所有区间均已处理，数组按非降序排列。可回退查看任意一次交换。',[32]);
+ return trace;
+}
+</script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const source=[
+[7,'def sort(left: int, right: int) -> None:'],[8,'    while left < right:'],[9,'        pivot = nums[(left + right) // 2]'],[10,'        less = left'],[11,'        current = left'],[12,'        greater = right'],[13,''],[14,'        while current <= greater:'],[15,'            if nums[current] < pivot:'],[16,'                nums[less], nums[current] = nums[current], nums[less]'],[17,'                less += 1'],[18,'                current += 1'],[19,'            elif nums[current] > pivot:'],[20,'                nums[current], nums[greater] = nums[greater], nums[current]'],[21,'                greater -= 1'],[22,'            else:'],[23,'                current += 1'],[24,''],[25,'        if less - left < right - greater:'],[26,'            sort(left, less - 1)'],[27,'            left = greater + 1'],[28,'        else:'],[29,'            sort(greater + 1, right)'],[30,'            right = less - 1'],[31,''],[32,'sort(0, len(nums) - 1)']];
+for(const [number,text] of source){const row=document.createElement('div');row.className='code-line';row.dataset.line=number;const num=document.createElement('span');num.className='lineno';num.textContent=number;row.append(num,document.createTextNode(text));$('code').append(row);}
+let trace=[],position=0,timer=null;
+function pause(){if(timer!==null)clearInterval(timer);timer=null;$('play').textContent='▶ 自动播放';}
+function region(s,index){if(s.kind==='done')return 'less';if(index<s.left||index>s.right)return 'outside';if(s.pivot===null)return 'unknown';if(index<s.less)return 'less';if(index<s.current)return 'equal';if(index<=s.greater)return 'unknown';return 'greater';}
+function render(){
+ const s=trace[position];const track=$('track');const gap=72,offset=100;
+ track.style.width=Math.max(300,s.items.length*gap+200)+'px';
+ for(let i=0;i<s.items.length;i++){
+  const item=s.items[i];let tile=track.querySelector('[data-id="'+item.id+'"]');
+  if(!tile){tile=document.createElement('div');tile.dataset.id=item.id;tile.innerHTML='<span></span><small></small>';track.append(tile);}
+  tile.className='tile '+region(s,i)+(s.current===i?' scanning':'')+(s.pair.includes(i)?' swapping':'');
+  tile.style.width=(String(item.value).length>5?66:56)+'px';tile.style.fontSize=String(item.value).length>5?'14px':'21px';
+  tile.style.transform='translateX('+(offset+i*gap)+'px)';tile.querySelector('span').textContent=item.value;tile.querySelector('small').textContent='#'+item.id;
+  tile.setAttribute('aria-label','下标 '+i+'，值 '+item.value+'，身份 '+item.id);
+ }
+ track.querySelectorAll('.pointer,.boundary,.slotlabel').forEach(n=>n.remove());
+ for(let i=0;i<s.items.length;i++){const label=document.createElement('div');label.className='slotlabel';label.style.left=offset+i*gap+'px';label.textContent=i;track.append(label);}
+ const pointers=new Map();for(const name of ['less','current','greater']){const v=s[name];if(v!==null){if(!pointers.has(v))pointers.set(v,[]);pointers.get(v).push(name);}}
+ for(const [index,names] of pointers){const el=document.createElement('div');el.className='pointer';el.style.left=offset+index*gap+28+'px';const b=document.createElement('b');b.textContent=names.join(' / ');el.append(b);track.append(el);}
+ for(const name of ['left','right']){const el=document.createElement('div');el.className='boundary';el.style.left=offset+s[name]*gap+'px';el.style.top=name==='left'?'150px':'162px';el.textContent=name+'='+s[name];track.append(el);}
+ $('vars').replaceChildren();for(const key of ['left','right','pivot','less','current','greater']){const el=document.createElement('div');el.className='var';el.append(document.createTextNode(key));const value=document.createElement('strong');value.textContent=s[key]===null?'—':s[key];el.append(value);$('vars').append(el);}
+ $('stepTitle').textContent=s.title;$('explanation').textContent=s.text+(s.kind.startsWith('swap-')?' 此刻指针尚未更新，下一步会恢复四区间边界。':'');
+ $('counter').textContent=(position+1)+' / '+trace.length+' 步 · 检查 '+s.comparisons+' · 交换 '+s.swaps;
+ $('depth').textContent='深度 '+s.stack.length;
+ $('stack').replaceChildren();if(!s.stack.length){const p=document.createElement('p');p.className='muted';p.textContent=s.kind==='done'?'调用栈已清空。':'尚未进入 sort。';$('stack').append(p);}
+ s.stack.forEach((frame,i)=>{const el=document.createElement('div');el.className='frame'+(i===s.stack.length-1?' active':'');el.textContent='第 '+(i+1)+' 层 · sort('+frame.left+', '+frame.right+')';const sub=document.createElement('small');sub.textContent=i===s.stack.length-1?'正在执行':'等待短区间返回';el.append(sub);$('stack').append(el);});
+ document.querySelectorAll('.code-line').forEach(el=>el.classList.toggle('active',s.lines.includes(Number(el.dataset.line))));
+ $('seek').value=position;$('prev').disabled=position===0;$('next').disabled=position===trace.length-1;
+ if(position===trace.length-1)pause();
+}
+function move(delta){position=Math.max(0,Math.min(trace.length-1,position+delta));render();}
+function load(){try{const values=parseArray($('arrayInput').value);pause();trace=buildTrace(values);position=0;$('track').replaceChildren();$('seek').max=trace.length-1;$('error').textContent='';render();}catch(error){$('error').textContent=error.message;}}
+function play(){if(timer!==null){pause();return;}if(position===trace.length-1){position=0;render();}$('play').textContent='Ⅱ 暂停';timer=setInterval(()=>move(1),Number($('speed').value));}
+$('arrayForm').addEventListener('submit',event=>{event.preventDefault();load();});
+document.querySelectorAll('[data-values]').forEach(b=>b.addEventListener('click',()=>{$('arrayInput').value=b.dataset.values;load();}));
+$('prev').onclick=()=>{pause();move(-1);};$('next').onclick=()=>{pause();move(1);};$('play').onclick=play;
+$('reset').onclick=()=>{pause();position=0;render();};$('seek').oninput=()=>{pause();position=Number($('seek').value);render();};
+$('speed').onchange=()=>{document.documentElement.style.setProperty('--duration',Math.min(380,Number($('speed').value)*.55)+'ms');if(timer!==null){pause();play();}};
+document.addEventListener('keydown',event=>{if(event.target.closest('input,select,button,summary'))return;if(event.code==='Space'){event.preventDefault();play();}else if(event.key==='ArrowRight'){event.preventDefault();pause();move(1);}else if(event.key==='ArrowLeft'){event.preventDefault();pause();move(-1);}});
+load();
+</script></body></html>

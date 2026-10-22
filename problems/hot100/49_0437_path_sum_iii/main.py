@@ -58,40 +58,45 @@ def solve() -> None:
 
     stack = [(root,0,False)]
 
-    path_sum = {0:1}
+    prefix = {0:1}
 
-    answer = 0
+    ans = 0
 
     while stack:
 
         node,pre,visit = stack.pop()
 
         if node is None:
-            continue
 
+            continue
 
         if not visit:
 
-            cur = pre+node.val
+            total = pre+node.val
 
-            answer += path_sum.get(cur-targetSum,0)
+            ans+=prefix.get(total-targetSum,0)
 
-            path_sum[cur] = path_sum.get(cur,0)+1
+            prefix[total] = prefix.get(total,0)+1
 
-            stack.append((node,cur,True))
-            stack.append((node.right,cur,False))
-            stack.append((node.left,cur,False))
+            stack.append((node,total,True))
+
+            stack.append((node.right,total,False))
+
+            stack.append((node.left,total,False))
 
         else:
 
-            path_sum[pre]-=1
+            prefix[pre]-=1
 
-            if path_sum[pre]==0:
+            if prefix[pre]==0:
+                del prefix[pre]
 
-                del path_sum[pre]
+    print(ans)
 
 
-    print(answer) 
+
+
+            
 
             
             

@@ -2,48 +2,53 @@ import sys
 from typing import Optional
 
 class Node:
+
     def __init__(self,val:int):
         self.val = val
         self.next = None
 
 
-def build_list(data:list)->Node:
+def build_node(data:list)->Node:
 
     if not data:
+
         return
 
     dummy = Node(0)
-    cur = dummy
 
-    for i,d in enumerate(data):
+    cur =dummy
+
+    for d in data:
 
         cur.next = Node(int(d))
         cur = cur.next
 
     return dummy.next
 
-def reverse_k_list(head:Node,k:int)->Node:
+
+def reverse_k(head:Node,k:int)->Node:
 
     dummy = Node(0)
-    
+
     dummy.next = head
 
     pre_tail = dummy
 
-    while True:
+    while pre_tail.next:
 
-        cur  = pre_tail.next
+        cur = pre_tail.next
 
         for _ in range(k):
 
             if cur is None:
                 return dummy.next
 
-            cur = cur.next
+            cur =  cur.next
 
-        next_head = cur
 
-        pre = next_head
+        nxt_head = cur
+
+        pre = nxt_head
 
         cur = pre_tail.next
 
@@ -56,37 +61,39 @@ def reverse_k_list(head:Node,k:int)->Node:
             cur.next = pre
 
             pre = cur
+
             cur = nxt
 
         pre_tail.next = pre
+
         pre_tail = old_head
 
-        
+    return dummy.next
 
 
-def solve()->None:
+def solve():
 
     data = sys.stdin.buffer.read().split()
 
     if not data:
+
         return
 
-    n = int(data[0])
+    k  = int(data[1])
 
-    k = int(data[1])
+    head  = build_node(data[2:])
 
-    head = build_list(data[2:])
-
-    head = reverse_k_list(head,k)
+    head = reverse_k(head,k)
 
     cur = head
 
     out = []
 
     while cur:
-        out.append(cur.val)
-        cur = cur.next
 
+        out.append(cur.val)
+
+        cur = cur.next
 
     print(*out)
 

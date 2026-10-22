@@ -2,6 +2,7 @@ import sys
 
 from collections import deque
 
+
 class TreeNode:
     def __init__(self,val:int):
         self.val = val
@@ -9,34 +10,30 @@ class TreeNode:
         self.right = None
 
 
-def build_tree(data:list):
+def build_tree(data:list)->TreeNode:
 
     if not data:
         return
 
-    root = TreeNode(data[0])
+    root = TreeNode(int(data[0]))
 
     queue = deque([root])
 
     index = 1
 
-    while queue and index<len(data):
+
+    while index<len(data) and queue:
 
         node = queue.popleft()
 
-        if data[index] !="null":
-
-            node.left = TreeNode(data[index])
-
+        if data[index]!=b"null":
+            node.left = TreeNode(int(data[index]))
             queue.append(node.left)
 
         index+=1
 
-
-        if index<len(data) and data[index]!="null":
-
-            node.right = TreeNode(data[index])
-
+        if index<len(data) and data[index]!=b"null":
+            node.right = TreeNode(int(data[index]))
             queue.append(node.right)
 
         index+=1
@@ -47,16 +44,12 @@ def build_tree(data:list):
 
 def solve()->None:
 
-    n = int(sys.stdin.readline())
+    data  = sys.stdin.buffer.read().split()
 
-    data = sys.stdin.readline().split()
-
-    if n==0:
-        print([])
-
+    if not data:
         return
 
-    root = build_tree(data)
+    root = build_tree(data[1:])
 
     stack = [(root,False)]
 
@@ -67,7 +60,9 @@ def solve()->None:
         node,visit = stack.pop()
 
         if node is None:
+
             continue
+
 
         if not visit:
 
@@ -79,7 +74,7 @@ def solve()->None:
 
             if pre:
                 pre.right = node
-                pre.left = None
+
             pre = node
 
     cur = root
@@ -90,9 +85,9 @@ def solve()->None:
         out.append(cur.val)
         cur = cur.right
 
+
     print(*out)
-            
 
-if __name__ == "__main__":
+
+if __name__ =="__main__":
     solve()
-

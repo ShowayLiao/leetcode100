@@ -2,8 +2,8 @@ import sys
 
 from typing import Optional
 
-
 class Node:
+
     def __init__(self,k:int,v:int):
         self.k = k
         self.v = v
@@ -11,95 +11,110 @@ class Node:
         self.next = None
 
 
-class LRUcahce:
+
+
+class LRU_cache:
+
     def __init__(self,c:int):
-        self.map:dict[int,Node] = {}
         self.head = Node(0,0)
         self.tail = Node(0,0)
+        self.lru_dict:dict[int:Node] = {}
         self.head.next = self.tail
         self.tail.pre = self.head
-        self.c = c
+        self.c =c
 
     def _unlink(self,node:Node):
+        if node:
+            node.pre.next,node.next.pre = node.next,node.pre
 
-        node.pre.next,node.next.pre = node.next,node.pre
-         
+    def _push(self,node:Node):
 
-    def _push_front(self,node:Node):
+        if node:
 
-        nxt = self.head.next
+            node.next = self.head.next
 
-        self.head.next = node
+            node.pre = self.head
 
-        nxt.pre = node
-
-        node.next = nxt
-        node.pre = self.head
+            self.head.next.pre,self.head.next = node,node
 
     def _touch(self,node:Node):
 
         self._unlink(node)
-        self._push_front(node)
+        self._push(node)
 
+    def get(self,k:int):
 
-    def get(self,k:int)->int:
+        node = self.lru_dict.get(k,None)
 
-        node = self.map.get(k,None)
 
         if node:
             self._touch(node)
             return node.v
+
         else:
             return -1
 
 
-    def put(self,k:int,v:int)->None:
+    def put(self,k:int,v:int):
 
-        node = self.map.get(k,None)
+        node = self.lru_dict.get(k,None)
 
         if node:
-            self.map[k].v = v
+
+            node.v = v
+
             self._touch(node)
 
         else:
 
             node = Node(k,v)
-            self.map[k] = node
-            self._push_front(node)
 
-        if len(self.map)>self.c:
+            self._push(node)
+
+            self.lru_dict[k] = node
+
+        if len(self.lru_dict)>self.c:
 
             node = self.tail.pre
+
             self._unlink(node)
-            del self.map[node.k]
+
+            del self.lru_dict[node.k]
+
+
+
+
 
 
 def solve():
 
-    data = sys.stdin.buffer.read().splitlines()
+    lines = sys.stdin.buffer.read().splitlines()
 
-    if not data:
+    if not lines:
         return
 
-    c,q = map(int,data[0].split())
+    c,q = map(int,lines[0].split())
 
-    lru = LRUcahce(c)
+    lru = LRU_cache(c)
 
-    for i,line in enumerate(data[1:]):
+    for line in lines[1:]:
 
-        d = line.split()
+        data = line.split()
 
-        if d[0]==b"put":
-            lru.put(int(d[1]),int(d[2]))
+        if data[0]==b"put":
 
-        elif d[0]==b"get":
-            print(lru.get(int(d[1])))
+            lru.put(int(data[1]),int(data[2]))
+            
 
+        elif data[0]==b"get":
+
+            v = lru.get(int(data[1]))
+            print(v)
+
+
+
+    
         
-
-
-
-
 
 
 

@@ -30,21 +30,15 @@ def solve() -> None:
 
     n = int(data[1])
 
-    if n==0:
-        print("empty")
-        return
-
     head = build_node(data[2:])
 
     dummy = Node(0)
 
     dummy.next = head
 
-
     slow = dummy
 
     fast = dummy
-
 
     for _ in range(n):
 
@@ -52,21 +46,14 @@ def solve() -> None:
 
 
     while fast:
-
+        fast = fast.next
         pre = slow
         slow = slow.next
-        fast = fast.next
 
     pre.next = slow.next
 
 
     cur = dummy.next
-
-    if cur is None:
-
-        print("empty")
-
-        return
 
     out = []
 
@@ -74,7 +61,11 @@ def solve() -> None:
         out.append(cur.val)
         cur = cur.next
 
-    print(*out)
+    if out:
+        print(*out)
+
+    else:
+        print("empty")
 
 
     

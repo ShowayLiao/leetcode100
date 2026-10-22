@@ -26,19 +26,7 @@ def solve() -> None:
         return
     # TODO: implement the ACM-style solution.
 
-    n = int(data[0])
-
     head = build_node(data[1:])
-
-    if n==0:
-        print("empty")
-        return
-
-
-    if n==1:
-        print(head.val)
-        return
-
 
     pre = None
 
@@ -47,15 +35,16 @@ def solve() -> None:
     while cur:
 
         nxt = cur.next
+
         cur.next = pre
+
         pre = cur
+
         cur = nxt
 
-    head = pre
-
+    head  = pre
 
     cur = head
-
 
     out = []
 
@@ -64,11 +53,12 @@ def solve() -> None:
         out.append(cur.val)
         cur = cur.next
 
+    if out:
+        print(*out)
 
-    print(*out)
+    else:
 
-    
-
+        print("empty")
 
 
         

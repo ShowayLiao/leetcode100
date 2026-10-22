@@ -15,7 +15,6 @@ def build_tree(data:list,n:int)->TreeNode:
     if not data:
         return root
 
-
     stack = [(0,n,None,None)]
 
     while stack:
@@ -30,27 +29,22 @@ def build_tree(data:list,n:int)->TreeNode:
         node = TreeNode(int(data[mid]))
 
         if parent is None:
+
             root = node
 
-        elif side == "left":
+        elif side =="left":
+
             parent.left = node
 
         else:
+
             parent.right = node
 
-        stack.append((
-            mid+1,r,node,"right"
-        ))
+        stack.append((l,mid,node,"left"))
+        stack.append((mid+1,r,node,"right"))
 
-        stack.append((
-            l,mid,node,"left"
-        ))
-
-        
 
     return root
-
-    
     
 
 

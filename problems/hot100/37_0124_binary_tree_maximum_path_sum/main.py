@@ -2,89 +2,88 @@ import sys
 from collections import deque
 
 class TreeNode:
+
     def __init__(self,val:int):
         self.val = val
         self.left = None
         self.right = None
 
 
-
-def build_tree(data:list)->None:
+def build_tree(data:list)->TreeNode:
 
     if not data:
-
         return
 
-    root = TreeNode(data[0])
+    root = TreeNode(int(data[0]))
 
     queue = deque([root])
 
-    index= 1
+    index = 1
 
     while queue and index<len(data):
 
         node = queue.popleft()
 
-        if data[index]!="null":
-
-            node.left = TreeNode(data[index])
+        if data[index]!=b"null":
+            
+            node.left = TreeNode(int(data[index]))
             queue.append(node.left)
 
         index+=1
 
-        if index<len(data) and data[index]!="null":
+        if index < len(data) and data[index]!=b"null":
 
-            node.right = TreeNode(data[index])
+            node.right = TreeNode(int(data[index]))
             queue.append(node.right)
 
+
         index+=1
+
 
     return root
 
 
 def solve()->None:
 
-    n = int(sys.stdin.readline())
+    data = sys.stdin.buffer.read().split()
 
-    data = sys.stdin.readline().split()
+    if not data:
+       return
 
-    for i,d in enumerate(data):
-        if d=="null":
-            continue
-
-        data[i] = int(d)
-
-    root = build_tree(data)
+    root = build_tree(data[1:])
 
     stack = [(root,False)]
 
-    sum ={}
+    path_sum = {}
 
-    ans = float("-inf")
+    ans= float("-inf")
 
     while stack:
 
-        node,visit = stack.pop()
+       node,visit = stack.pop()
 
-        if node is None:
-            continue
+       if node is None:
+           continue
 
-        if not visit:
+       if not visit:
 
-            stack.append((node,True))
-            stack.append((node.right,False))
-            stack.append((node.left,False))
+           stack.append((node,True))
+           stack.append((node.right,False))
+           stack.append((node.left,False))
 
-        else:
 
-            left = max(sum.get(node.left,0),0)
-            right = max(sum.get(node.right,0),0)
+       else:
 
-            ans = max(ans,left+right+node.val)
+           left = max(path_sum.get(node.left,0),0)
+           right = max(path_sum.get(node.right,0),0)
 
-            sum[node] = max(left+node.val,right+node.val)
-            
+           ans = max(ans,left+right+node.val)
 
+           path_sum[node] = max(left+node.val,right+node.val)
+
+    
+    
+    
     print(ans)
 
 
