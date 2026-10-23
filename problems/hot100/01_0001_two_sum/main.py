@@ -2,21 +2,38 @@ import sys
 
 
 def solve()->None:
-    n,target = map(int,sys.stdin.readline().split())
-    nums = list(map(int,sys.stdin.readline().split()))
 
-    seen:dict[int,int] = {
+    data = sys.stdin.buffer.read().split()
 
-    }
+    if not data:
+        return
 
-    for i,num in enumerate(nums):
-        complement = target-num
+    n = int(data[0])
 
-        if complement in seen:
-            print(seen[complement],i)
+    t_sum = int(data[1])
+
+    values = list(map(int,data[2:]))
+
+    nums_dict = {}
+
+    for i,d in enumerate(values):
+
+        i_b = nums_dict.get(t_sum-d,None)
+
+        if i_b is not None:
+
+            print(i_b,i)
+
             return
 
-        seen[num]= i
+        nums_dict[d] = i
+
+    
+
+
+    
+
+
 
 
     

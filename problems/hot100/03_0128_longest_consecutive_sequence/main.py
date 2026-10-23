@@ -2,28 +2,34 @@ import sys
 
 def solve()->None:
 
-    n = int(sys.stdin.readline())
+    data = sys.stdin.read().split()
 
-    nums = list(map(int,sys.stdin.readline().split()))
+    if not data:
+        return
 
-    values = set(nums)
+    nums = list(map(int,data[1:]))
 
-    max_len = 0
+    uni = list(set(nums))
 
-    for v in values:
-        if v-1 in values:
+    ans = 1
+
+    if len(nums)==0:
+        print(0)
+        return
+
+    for d in nums:
+
+        if d-1 in uni:
             continue
 
-        len = 1
+        count = 1
 
-        while v+len in values:
-            len+=1
+        while d+1 in uni:
+            count+=1
+            d+=1
+            ans = max(ans,count)
 
-        max_len = max(len,max_len)
-
-
-    print(max_len)
-
+    print(ans)
     
 
 
