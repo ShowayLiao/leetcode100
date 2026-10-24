@@ -3,36 +3,46 @@ import sys
 
 def solve()->None:
 
-    n = int(sys.stdin.readline())
+    data = sys.stdin.read().split()
 
-    nums = list(map(int,sys.stdin.readline().split()))
+    if not data:
+        return
+
+    n = int(data[0])
 
     if n==0:
-
         print(0)
-        return 
+        return
+
+    heights = list(map(int,data[1:]))
 
     left = 0
 
     right = n-1
 
-    left_max = nums[left]
+    left_max = heights[left]
 
-    right_max = nums[right]
+    right_max = heights[right]
 
     water = 0
 
     while left<right:
+
         if left_max<right_max:
-            left+=1
-            left_max = max(nums[left],left_max)
-            water += left_max-nums[left]
+
+            left +=1
+
+            left_max = max(left_max,heights[left])
+
+            water += left_max-heights[left]
 
         else:
-            right-=1
-            right_max = max(nums[right],right_max)
-            water +=right_max-nums[right]
 
+            right-=1
+
+            right_max = max(right_max,heights[right])
+
+            water+= right_max-heights[right]
 
 
     print(water)

@@ -2,51 +2,57 @@ import sys
 
 def solve()->None:
 
-    n = int(sys.stdin.readline())
+    data = sys.stdin.read().split()
 
-    nums = list(map(int,sys.stdin.readline().split()))
+    values = list(map(int,data[1:]))
 
-    nums.sort()
+    values = sorted(values)
 
-    result = []
+    ans = []
 
-    for i,num in enumerate(nums):
+    for i,d in enumerate(values):
 
-        if i>0 and nums[i]==nums[i-1]:
-
+        if i>0 and values[i]==values[i-1]:
             continue
+
+        t_sum = -d
 
         left = i+1
 
-        right = n-1
+        right = len(values)-1
 
-        while left<right:
-            total = num+nums[left]+nums[right]
+        while left < right:
 
-            if total==0:
-                result.append([num,nums[left],nums[right]])
+            total = values[left]+values[right]
 
+            if total<t_sum:
                 left+=1
+
+            elif total>t_sum:
                 right-=1
 
-                while left<right and nums[left]==nums[left-1]:
+            else:
+                ans.append((d,values[left],values[right]))
+
+                left+=1
+
+                right-=1
+
+                while left<right and values[left]==values[left-1]:
                     left+=1
 
-                while left<right and nums[right]==nums[right+1]:
+                while left<right and values[right]==values[right+1]:
                     right-=1
 
 
-            else:
-                left = left+1 if total<0 else left
-                right = right-1 if total>0 else right
+    n = len(ans)
 
+    print(n)
+
+    if n:
+        for num in ans:
+            print(*num)
     
-
-
-    print(len(result))
-
-    for s in result:
-        print(*s)
 
 
 

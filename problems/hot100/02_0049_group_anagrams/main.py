@@ -23,17 +23,17 @@ def solve()->None:
 
     ch_list = sorted(ch_list)
 
-    if n==0:
-        print(0)
-        return
+    n = len(ch_list)
 
+    print(n)
 
-    print(len(ch_list))
+    if n!=0:
 
-    for c in ch_list:
-        print(*c)
+        for l in ch_list:
+
+            print(*l)
+
     
-
 
 
 

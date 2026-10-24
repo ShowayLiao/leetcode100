@@ -3,22 +3,21 @@ import sys
 
 def solve()->None:
 
-    data = sys.stdin.buffer.read().split()
+    data = sys.stdin.read().split()
 
     if not data:
-        return
 
-    n = int(data[0])
+        return
 
     t_sum = int(data[1])
 
     values = list(map(int,data[2:]))
 
-    nums_dict = {}
+    index_dict = {}
 
     for i,d in enumerate(values):
 
-        i_b = nums_dict.get(t_sum-d,None)
+        i_b = index_dict.get(t_sum-d,None)
 
         if i_b is not None:
 
@@ -26,7 +25,9 @@ def solve()->None:
 
             return
 
-        nums_dict[d] = i
+        index_dict[d] = i
+
+    
 
     
 
