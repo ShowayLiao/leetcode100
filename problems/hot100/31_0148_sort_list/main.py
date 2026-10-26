@@ -7,6 +7,13 @@ class Node:
         self.val = val
         self.next = None
 
+    def __iter__(self):
+        cur = self
+
+        while cur is not None:
+            yield cur
+            cur = cur.next
+
 
 def build_node(data:list)->Node:
 
@@ -25,7 +32,7 @@ def build_node(data:list)->Node:
     return dummy.next
 
 
-def split(head:Node)->tuple[Node,Node]:
+def split(head)->tuple[Node,Node]:
 
     dummy = Node(0)
 
@@ -36,15 +43,14 @@ def split(head:Node)->tuple[Node,Node]:
     fast = dummy
 
     while fast and fast.next:
-
         fast = fast.next.next
         slow = slow.next
 
-    next_head = slow.next
+    right = slow.next
 
     slow.next = None
 
-    return dummy.next,next_head
+    return dummy.next,right
 
 
 def sort_two(a:Node,b:Node)->Node:
@@ -57,10 +63,9 @@ def sort_two(a:Node,b:Node)->Node:
 
         if a.val<b.val:
             cur.next = a
-            a = a.next
+            a =a.next
 
         else:
-
             cur.next = b
             b = b.next
 
@@ -70,28 +75,23 @@ def sort_two(a:Node,b:Node)->Node:
 
     return dummy.next
 
-
-
+    
 def sort_list(head:Node)->Node:
 
     if head is None:
-        return 
+        return
 
     if head.next is None:
         return head
 
 
-    left_head,right_head = split(head)
+    left,right = split(head)
 
-    a = sort_list(left_head)
+    a = sort_list(left)
 
-    b = sort_list(right_head)
-
+    b = sort_list(right)
 
     return sort_two(a,b)
-    
-    
-
 
 
 
@@ -112,22 +112,15 @@ def solve():
 
     head = build_node(data[1:])
 
+    new = sort_list(head)
 
-    cur = sort_list(head)
-
-    out = []
-
-    while cur:
-
-        out.append(cur.val)
-        cur = cur.next
-
-    if out:
-        print(*out)
-
-    else:
+    if new is None:
         print("empty")
+        return
 
+    out = [node.val for node in new]
+
+    print(*out)
     
 
 

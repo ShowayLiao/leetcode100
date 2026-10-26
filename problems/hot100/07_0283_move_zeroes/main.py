@@ -2,24 +2,38 @@ import sys
 
 def solve()->None:
 
-    n = int(sys.stdin.readline())
+    data = sys.stdin.read().split()
 
-    nums = list(map(int,sys.stdin.readline().split()))
+    if not data:
+        return
+
+    n = int(data[0])
+
+    if n==0:
+        print()
+        return
+
+
+    values = list(map(int,data[1:]))
 
     write = 0
 
-    for read in range(n):
-        # 本质上write指向应该写入非0的地方
-        # read指向遍历整个数组
-        # 所以nums[write]在非零的时候写入nums[read]
-        # 因为write比read始终要慢（遇到0不递增）
-        # 所以read非零才这样做，把0元素全部甩到了尾巴
-        if nums[read]!=0:
-            nums[write],nums[read] = nums[read],nums[write]
+    read = 0
+
+    while read<n:
+
+        if values[read]!=0:
+            values[write],values[read] = values[read],values[write]
             write+=1
+            read+=1
+        else:
+            read+=1
+
+        
+        
 
 
-    print(*nums)
+    print(*values)
 
 
             

@@ -3,24 +3,31 @@ import sys
 
 def solve()->None:
 
-    s = sys.stdin.readline().rstrip("\r\n")
+    data = sys.stdin.read().splitlines()
 
-    start = 0
+    if not data :
+        return
+
+    s = data[0]
 
     seen = set()
 
-    max_len = 0
+    start = 0
 
-    for end,ch in enumerate(s):
-        while ch in seen:
+    ans = 0
+
+    for c in s:
+
+        while c in seen:
+
             seen.remove(s[start])
             start+=1
 
-        seen.add(ch)
+        seen.add(c)
 
-        max_len = max(max_len,end-start+1)
+        ans = max(len(seen),ans)
 
-    print(max_len)
+    print(ans)
 
 
 

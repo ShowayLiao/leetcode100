@@ -2,29 +2,35 @@ import sys
 
 def solve()->None:
 
-    n,target = map(int,sys.stdin.readline().split())
+    data = sys.stdin.read().split()
 
-    nums = list(map(int,sys.stdin.readline().split()))
+    if not data:
+        return
 
-    result = 0
+    t = int(data[1])
 
-    prefix = 0
+    values = list(map(int,data[2:]))
 
-    seen:dict[int,int] = {0:1}
+    sum = 0
+
+    prefix = {0:1}
+
+    ans = 0
+
+    for v in values:
+
+        sum+=v
+
+        pre = prefix.get(sum-t,None)
+
+        if pre is not None:
+            ans+=pre
+
+        prefix[sum] = prefix.get(sum,0)+1
 
 
-    for num in nums:
-        prefix+=num
+    print(ans)
 
-        need = prefix-target
-
-        result+=seen.get(need,0)
-
-        seen[prefix] = seen.get(prefix,0)+1
-
-    
-
-    print(result)
         
 
 

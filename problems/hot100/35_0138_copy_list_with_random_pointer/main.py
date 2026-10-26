@@ -3,100 +3,139 @@ import sys
 class Node:
 
     def __init__(self,val:int,random = None,next = None):
+
         self.val = val
-        self.random  = random
+
+        self.random = random
+
         self.next = next
 
-
     def __iter__(self):
+
         cur = self
 
         while cur is not None:
+
             yield cur
-            cur =cur.next
+
+            cur = cur.next
 
 
-def build_node(data:list)->Node:
+def build_node(data:list):
 
     if not data:
+
         return
 
     dummy = Node(0)
 
     cur = dummy
 
-    r_list = []
-
     heads = []
+
+    r_list = []
 
     for i in range(0,len(data),2):
 
         cur.next = Node(int(data[i]))
-
         cur = cur.next
 
-        r_list.append(int(data[i+1]))
         heads.append(cur)
+        r_list.append(int(data[i+1]))
+
 
     for i,node in enumerate(heads):
 
-        if r_list[i]==-1:
-            continue
+        if r_list[i]!=-1:
 
-        node.random = heads[r_list[i]]
-
+            node.random = heads[r_list[i]]
 
     return heads[0]
 
 
 def deep_copy(head:Node):
 
+    dummy = Node(0)
+
+    cur =dummy
+
     heads = []
 
-    heads_dict = {node:i for i,node in enumerate(head)}
+    node_dict = {}
 
-    r_list = []
+    i = 0
 
     for node in head:
-        heads.append(Node(node.val))
-        r_list.append(heads_dict.get(node.random,-1))
 
-    for i in range(len(heads)):
+        cur.next = Node(node.val,node.random)
+        cur = cur.next
 
-        if i!=len(heads)-1:
+        heads.append(cur)
 
-            heads[i].next = heads[i+1]
+        node_dict[node] = i
 
-        if r_list[i]!=-1:
+        i+=1
 
-            heads[i].random = heads[r_list[i]]
+    for i,node in enumerate(heads):
+
+        random = node_dict.get(node.random,-1)
+        if random!=-1:
+            node.random = heads[random]
+
 
     return heads
         
 
 
-def solve() -> None:
-    data = sys.stdin.buffer.read().split()
+
+
+
+
+
+        
+
+
+def solve():
+
+    data = sys.stdin.read().split()
+
     if not data:
         return
-    # TODO: implement the ACM-style solution.
 
     n = int(data[0])
-
-    head = build_node(data[1:])
 
     if n==0:
         print(0)
         return
 
-    copy_heads = deep_copy(head)
+    head = build_node(data[1:])
 
-    print(len(copy_heads))
+    new_heads = deep_copy(head)
 
-    copy_dict = {node:i for i,node in enumerate(copy_heads)}
+    copy_dict = {node:i for i,node in enumerate(new_heads)}
 
-    for node in copy_heads:
-        print(node.val,copy_dict.get(node.random,-1))
+    n = len(new_heads)
+
+    print(n)
+
+    if n!=0:
+
+        for node in new_heads:
+            print(node.val,copy_dict.get(node.random,-1))
+
+
+
+
+
+
+
+
+
+    
+        
+        
+
+        
 
 
 

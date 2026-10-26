@@ -6,6 +6,14 @@ class Node:
         self.next = None
 
 
+    def __iter__(self):
+        cur = self
+
+        while cur is not None:
+            yield cur
+            cur = cur.next
+
+
 def build_node(data:list)->Node:
 
     if not data:
@@ -48,25 +56,24 @@ def solve() -> None:
             head1 = head1.next
 
         else:
+
             cur.next = head2
-            head2  = head2.next
+            head2 = head2.next
 
         cur = cur.next
 
     cur.next = head1 if head1 else head2
 
-    out = []
-
-    cur = dummy.next
-
-    while cur:
-        out.append(cur.val)
-        cur = cur.next
-
-    if out:
-        print(*out)
-    else:
+    if dummy.next is None:
         print("empty")
+        return
+
+    list = [node.val for node in dummy.next]
+
+
+    print(*list)
+
+    
 
 
 if __name__ == "__main__":

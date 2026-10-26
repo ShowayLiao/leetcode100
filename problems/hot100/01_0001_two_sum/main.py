@@ -9,23 +9,25 @@ def solve()->None:
 
         return
 
-    t_sum = int(data[1])
+    t = int(data[1])
 
-    values = list(map(int,data[2:]))
+    num_dict = {}
 
-    index_dict = {}
+    for i,d in enumerate(data[2:]):
 
-    for i,d in enumerate(values):
+        d = int(d)
 
-        i_b = index_dict.get(t_sum-d,None)
+        i_b = num_dict.get(t-d,None)
 
         if i_b is not None:
-
             print(i_b,i)
-
             return
 
-        index_dict[d] = i
+
+        num_dict[d] = i
+
+    
+
 
     
 

@@ -40,19 +40,25 @@ def solve() -> None:
 
     head = build_node(data[2:],pos)
 
-    fast = head
+    if head is None:
+        print(-1)
+        return
 
     slow = head
 
+    fast = head
+
     while fast and fast.next:
-        slow = slow.next
+
         fast = fast.next.next
+
+        slow = slow.next
 
         if slow is fast:
             break
 
-
     if fast is None or fast.next is None:
+
         print(-1)
         return
 
@@ -60,13 +66,16 @@ def solve() -> None:
 
     count = 0
 
-    while cur!=fast:
+    while cur is not fast:
 
-        count+=1
         cur = cur.next
         fast = fast.next
 
+        count+=1
+
     print(count)
+
+    
 
 
 

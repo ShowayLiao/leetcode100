@@ -78,3 +78,23 @@
 | [problems/leetcode/0019_remove_nth_node_from_end_of_list](../problems/leetcode/0019_remove_nth_node_from_end_of_list/) | 未实现 | 1 / 8 | WRONG_ANSWER: 7 |
 | [problems/leetcode/0020_valid_parentheses](../problems/leetcode/0020_valid_parentheses/) | 未实现 | 0 / 8 | WRONG_ANSWER: 8 |
 | [problems/leetcode/0912_sort_an_array](../problems/leetcode/0912_sort_an_array/) | 本地用例通过 | 8 / 8 | — |
+
+## 2026-10-26：补建 Hot 100 第 11～21 题
+
+新增 11 道题、88 组完整测试。已用独立校验逻辑核对所有预期输出，并逐题执行 `python tools/run_tests.py <problem-directory>`。此处仅记录新题；上方历史快照不重新统计。
+
+所有新增 `main.py` 都是保留 `solve()` 与入口的未实现练习骨架；没有算法实现。第 11 题的两组无解用例因预期为空行而被工具判为通过，不能据此认定已实现。骨架测试无运行错误或超时。
+
+| 题目目录 | 状态 | 骨架通过数 |
+| --- | --- | --- |
+| [11_0076_minimum_window_substring](../problems/hot100/11_0076_minimum_window_substring/) | 未实现 | 2 / 8 |
+| [12_0239_sliding_window_maximum](../problems/hot100/12_0239_sliding_window_maximum/) | 未实现 | 0 / 8 |
+| [13_0056_merge_intervals](../problems/hot100/13_0056_merge_intervals/) | 未实现 | 0 / 8 |
+| [14_0053_maximum_subarray](../problems/hot100/14_0053_maximum_subarray/) | 未实现 | 0 / 8 |
+| [15_0041_first_missing_positive](../problems/hot100/15_0041_first_missing_positive/) | 未实现 | 0 / 8 |
+| [16_0189_rotate_array](../problems/hot100/16_0189_rotate_array/) | 未实现 | 0 / 8 |
+| [17_0238_product_of_array_except_self](../problems/hot100/17_0238_product_of_array_except_self/) | 未实现 | 0 / 8 |
+| [18_0240_search_a_2d_matrix_ii](../problems/hot100/18_0240_search_a_2d_matrix_ii/) | 未实现 | 0 / 8 |
+| [19_0048_rotate_image](../problems/hot100/19_0048_rotate_image/) | 未实现 | 0 / 8 |
+| [20_0073_set_matrix_zeroes](../problems/hot100/20_0073_set_matrix_zeroes/) | 未实现 | 0 / 8 |
+| [21_0054_spiral_matrix](../problems/hot100/21_0054_spiral_matrix/) | 未实现 | 0 / 8 |

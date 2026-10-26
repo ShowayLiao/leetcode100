@@ -13,7 +13,7 @@ class Node:
             yield cur
             cur = cur.next
 
-def build_node(data:list,pos:int = -1)->Node:
+def build_node(data:list,pos:int)->Node:
 
     if not data:
         return
@@ -30,7 +30,8 @@ def build_node(data:list,pos:int = -1)->Node:
 
         cur = cur.next
 
-        if i == pos:
+        if i==pos:
+
             ring = cur
 
     cur.next = ring
@@ -38,16 +39,23 @@ def build_node(data:list,pos:int = -1)->Node:
     return dummy.next
 
 
-def solve():
 
-    data = sys.stdin.buffer.read().split()
+def solve()->None:
+
+    data = sys.stdin.read().split()
 
     if not data:
         return
 
+
     pos = int(data[1])
 
+    
     head = build_node(data[2:],pos)
+
+    if head is None:
+        print("false")
+        return
 
     slow = head
 
@@ -56,21 +64,15 @@ def solve():
     while fast and fast.next:
 
         fast = fast.next.next
+
         slow = slow.next
 
-        if slow is fast:
-            break
+        if fast is slow:
+            print("true")
+            return
 
-    if fast is None or fast.next is None:
+    print("false")
 
-        print("false")
-
-    else:
-
-        print("true")
-
-
-    
 
     
 

@@ -32,52 +32,49 @@ def solve():
     if not data:
         return
 
-    it = iter(data)
+    na = int(data[0])
 
-    def read_values():
+    values_a = list(map(int,data[1:1+na]))
 
-        n = int(next(it))
+    nb = int(data[1+na])
 
-        return [next(it) for _ in range(n)]
+    values_b = list(map(int,data[2+na:2+na+nb]))
 
-    a_values = read_values()
+    share_n = int(data[2+na+nb])
 
-    b_values = read_values()
+    share_values = list(map(int,data[3+na+nb:]))
 
-    s_values = read_values()
+    share_head = build_node(share_values)
 
-    share = build_node(s_values)
+    heada = build_node(values_a,share_head)
 
-    a = build_node(a_values,share)
+    headb = build_node(values_b,share_head)
 
-    b = build_node(b_values,share)
+    p = heada
 
-    p = a
+    q = headb
 
-    q = b
+    while p is not q:
 
+        p = p.next if p else headb
+        q = q.next if q else heada
 
-    while p!=q:
-
-        p = p.next if p else b
-        q = q.next if q else a
-
-    if p is None and q is None:
+    if p is None:
         print(-1)
         return
 
-    cur = a
 
-    count = 0
+    cur = heada
 
-    while cur!=p:
+    ans = 0
+
+    while cur is not q:
+
         cur = cur.next
-        count+=1
 
-    print(count)
+        ans+=1
 
-
-
+    print(ans)
 
 
 

@@ -2,7 +2,7 @@
 
 - 官方题单：[LeetCode Hot 100](https://leetcode.cn/studyplan/top-100-liked/)
 - 分类参考：[luckdewei/leetcode_hot_100](https://github.com/luckdewei/leetcode_hot_100)
-- 当前本地进度：25 / 100 道本地用例通过；已建题 39 / 100。
+- 当前本地进度：25 / 100 道本地用例通过；已建题 50 / 100。
 
 状态说明：勾选 `[x]` 表示 Hot 100 目录当前本地用例通过，未勾选表示未建题、未实现或练习中，不代表官方 AC。详见 [本地验证记录](../docs/local_validation.md)。
 
@@ -29,23 +29,23 @@
 ## 子串与子数组（3）
 
 - [x] 560. [和为 K 的子数组](https://leetcode.cn/problems/subarray-sum-equals-k/)（中等）— [Hot100练习](../problems/hot100/10_0560_subarray_sum_equals_k/) · 本地用例通过
-- [ ] 76. [最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)（困难） — 未建题
-- [ ] 239. [滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)（困难） — 未建题
+- [ ] 76. [最小覆盖子串](https://leetcode.cn/problems/minimum-window-substring/)（困难）— [Hot100练习](../problems/hot100/11_0076_minimum_window_substring/) · 未实现
+- [ ] 239. [滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)（困难）— [Hot100练习](../problems/hot100/12_0239_sliding_window_maximum/) · 未实现
 
 ## 普通数组（5）
 
-- [ ] 56. [合并区间](https://leetcode.cn/problems/merge-intervals/)（中等） — 未建题
-- [ ] 53. [最大子数组和](https://leetcode.cn/problems/maximum-subarray/)（中等） — 未建题
-- [ ] 41. [缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)（困难） — 未建题
-- [ ] 189. [轮转数组](https://leetcode.cn/problems/rotate-array/)（中等） — 未建题
-- [ ] 238. [除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)（中等） — 未建题
+- [ ] 56. [合并区间](https://leetcode.cn/problems/merge-intervals/)（中等）— [Hot100练习](../problems/hot100/13_0056_merge_intervals/) · 未实现
+- [ ] 53. [最大子数组和](https://leetcode.cn/problems/maximum-subarray/)（中等）— [Hot100练习](../problems/hot100/14_0053_maximum_subarray/) · 未实现
+- [ ] 41. [缺失的第一个正数](https://leetcode.cn/problems/first-missing-positive/)（困难）— [Hot100练习](../problems/hot100/15_0041_first_missing_positive/) · 未实现
+- [ ] 189. [轮转数组](https://leetcode.cn/problems/rotate-array/)（中等）— [Hot100练习](../problems/hot100/16_0189_rotate_array/) · 未实现
+- [ ] 238. [除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)（中等）— [Hot100练习](../problems/hot100/17_0238_product_of_array_except_self/) · 未实现
 
 ## 矩阵（4）
 
-- [ ] 240. [搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)（中等） — 未建题
-- [ ] 48. [旋转图像](https://leetcode.cn/problems/rotate-image/)（中等） — 未建题
-- [ ] 73. [矩阵置零](https://leetcode.cn/problems/set-matrix-zeroes/)（中等） — 未建题
-- [ ] 54. [螺旋矩阵](https://leetcode.cn/problems/spiral-matrix/)（中等） — 未建题
+- [ ] 240. [搜索二维矩阵 II](https://leetcode.cn/problems/search-a-2d-matrix-ii/)（中等）— [Hot100练习](../problems/hot100/18_0240_search_a_2d_matrix_ii/) · 未实现
+- [ ] 48. [旋转图像](https://leetcode.cn/problems/rotate-image/)（中等）— [Hot100练习](../problems/hot100/19_0048_rotate_image/) · 未实现
+- [ ] 73. [矩阵置零](https://leetcode.cn/problems/set-matrix-zeroes/)（中等）— [Hot100练习](../problems/hot100/20_0073_set_matrix_zeroes/) · 未实现
+- [ ] 54. [螺旋矩阵](https://leetcode.cn/problems/spiral-matrix/)（中等）— [Hot100练习](../problems/hot100/21_0054_spiral_matrix/) · 未实现
 
 ## 链表（14）
 

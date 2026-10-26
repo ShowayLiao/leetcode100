@@ -8,6 +8,8 @@ def solve()->None:
 
     values = sorted(values)
 
+    n = int(data[0])
+
     ans = []
 
     for i,d in enumerate(values):
@@ -15,23 +17,18 @@ def solve()->None:
         if i>0 and values[i]==values[i-1]:
             continue
 
-        t_sum = -d
-
         left = i+1
 
-        right = len(values)-1
+        right = n-1
 
-        while left < right:
+        t_sum = -d
+
+        while left<right:
 
             total = values[left]+values[right]
 
-            if total<t_sum:
-                left+=1
+            if total==t_sum:
 
-            elif total>t_sum:
-                right-=1
-
-            else:
                 ans.append((d,values[left],values[right]))
 
                 left+=1
@@ -44,14 +41,24 @@ def solve()->None:
                 while left<right and values[right]==values[right+1]:
                     right-=1
 
+            elif total>t_sum:
 
-    n = len(ans)
+                right-=1
 
-    print(n)
+            else:
+                left+=1
 
-    if n:
-        for num in ans:
-            print(*num)
+    ans_n = len(ans)
+
+    print(ans_n)
+
+    if ans_n>0:
+        for c in ans:
+
+            print(*c)
+
+
+
     
 
 

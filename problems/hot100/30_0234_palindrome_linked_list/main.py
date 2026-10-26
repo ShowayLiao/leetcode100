@@ -12,7 +12,6 @@ def build_node(data:list)->tuple[Node,Node]:
     if not data:
         return None,None
 
-
     dummy = Node(0)
 
     cur = dummy
@@ -29,14 +28,12 @@ def build_node(data:list)->tuple[Node,Node]:
 
         cur.pre = pre
 
-
     head = dummy.next
 
     head.pre = None
 
-    tail = cur
+    return head,cur
 
-    return head,tail
 
 
 def solve():
@@ -48,11 +45,7 @@ def solve():
 
     head,tail = build_node(data[1:])
 
-    if head is None or tail is None:
-        print("true")
-        return
-
-    while head!=tail and head.pre!=tail:
+    while head is not tail and head.pre is not tail:
 
         if head.val!=tail.val:
             print("false")
@@ -61,8 +54,10 @@ def solve():
         head = head.next
         tail = tail.pre
 
-
     print("true")
+
+    
+    
 
 
 if __name__ == "__main__":
