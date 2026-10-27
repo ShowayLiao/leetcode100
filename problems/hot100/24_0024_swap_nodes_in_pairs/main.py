@@ -1,9 +1,20 @@
 import sys
 
 class Node:
-    def __init__(self,val:int):
+
+    def __init__(self,val):
         self.val = val
         self.next = None
+
+    def __iter__(self):
+        cur = self
+
+        while cur is not None:
+
+            yield cur
+
+            cur = cur.next
+
 
 
 def build_node(data:list)->Node:
@@ -13,61 +24,17 @@ def build_node(data:list)->Node:
 
     dummy = Node(0)
 
-    cur =dummy
+    cur = dummy
 
     for d in data:
-
         cur.next = Node(int(d))
         cur = cur.next
 
     return dummy.next
 
-def reverse_two(head:Node)->Node:
+def solve():
 
-    dummy = Node(0)
-
-    dummy.next = head
-
-    a = head
-
-    b = head.next
-
-    if b is None:
-        return dummy.next
-
-    pre = dummy
-
-    while b:
-
-        nxt = b.next
-
-        b.next = a
-
-        a.next = nxt
-
-        pre.next = b
-
-        pre = a
-
-        a = nxt
-
-        b = nxt.next if nxt else None
-
-        
-
-
-
-
-
-    return dummy.next
-
-
-
-
-
-def solve()->None:
-
-    data = sys.stdin.buffer.read().split()
+    data = sys.stdin.read().split()
 
     if not data:
         return
@@ -78,22 +45,40 @@ def solve()->None:
         print("empty")
         return
 
-    head = reverse_two(head)
+    if head.next is None:
+        print(head.val)
+        return
 
-    cur =head
+    dummy = Node(0)
 
-    out = []
+    dummy.next = head
 
-    while cur:
-        out.append(cur.val)
-        cur = cur.next
+    prev = dummy
 
-    if out:
-        print(*out)
+    a = head
 
-    else:
-        print("empty")
+    b = head.next
 
+    while a and b:
+
+        nxt = b.next
+
+        a.next = nxt
+
+        b.next = a
+
+        prev.next = b
+
+        prev = a
+
+        a = nxt
+
+        if nxt:
+            b = nxt.next
+
+    out = [cur.val for cur in dummy.next]
+
+    print(*out)
     
 
     

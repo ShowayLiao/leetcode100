@@ -14,34 +14,36 @@ def solve()->None:
 
     need = [0 for _ in range(26)]
 
-    ans = []
-
-    for c in p:
-        need[ord(c)-ord("a")]+=1
-
     windows = [0 for _ in range(26)]
 
-    for i in range(len(p)):
+    ans = []
 
+    for i in range(np):
+
+        need[ord(p[i])-ord("a")]+=1
         windows[ord(s[i])-ord("a")]+=1
 
-    if windows==need:
+    if need==windows:
         ans.append(0)
+
 
     for i in range(np,ns,1):
 
         windows[ord(s[i])-ord("a")]+=1
+
         windows[ord(s[i-np])-ord("a")]-=1
 
         if windows==need:
             ans.append(i-np+1)
 
-    ans_n =  len(ans)
+    n_ans = len(ans)
 
-    print(ans_n)
+    print(n_ans)
 
-    if ans_n>0:    
+    if n_ans>0:
+
         print(*ans)
+
 
 
 

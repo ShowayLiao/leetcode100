@@ -15,23 +15,20 @@ def solve()->None:
 
     right = n-1
 
-    water = 0
+    water = min(h[left],h[right])*(right-left)
 
     while left<right:
 
-        
-
         if h[left]<h[right]:
-            water = max(water,h[left]*(right-left))
+
             left+=1
 
         else:
-            water = max(water,h[right]*(right-left))
             right-=1
 
+        water = max(water,min(h[left],h[right])*(right-left))
 
     print(water)
-
     
     
 

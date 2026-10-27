@@ -61,12 +61,12 @@ def solve() -> None:
 
 
     while len(out)>1 and out[-1]==0:
-
         out.pop()
 
+    if out:
 
-    print(*out)
-        
+        print(*out)
+
 
 
         

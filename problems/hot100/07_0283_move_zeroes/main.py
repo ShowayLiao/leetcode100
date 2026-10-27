@@ -16,22 +16,15 @@ def solve()->None:
 
     values = list(map(int,data[1:]))
 
-    write = 0
-
     read = 0
 
-    while read<n:
+    write = 0
+
+    for read in range(n):
 
         if values[read]!=0:
-            values[write],values[read] = values[read],values[write]
+            values[read],values[write]=values[write],values[read]
             write+=1
-            read+=1
-        else:
-            read+=1
-
-        
-        
-
 
     print(*values)
 

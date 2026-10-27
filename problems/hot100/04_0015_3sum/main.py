@@ -4,44 +4,45 @@ def solve()->None:
 
     data = sys.stdin.read().split()
 
+    n = int(data[0])
+
     values = list(map(int,data[1:]))
 
-    values = sorted(values)
-
-    n = int(data[0])
+    vals = sorted(values)
 
     ans = []
 
-    for i,d in enumerate(values):
+    for i,d in enumerate(vals):
 
-        if i>0 and values[i]==values[i-1]:
+        if i>0 and vals[i]==vals[i-1]:
             continue
+
 
         left = i+1
 
         right = n-1
 
-        t_sum = -d
+        t = -d
 
         while left<right:
 
-            total = values[left]+values[right]
+            total = vals[left]+vals[right]
 
-            if total==t_sum:
+            if total==t:
 
-                ans.append((d,values[left],values[right]))
+                ans.append((d,vals[left],vals[right]))
 
                 left+=1
 
                 right-=1
 
-                while left<right and values[left]==values[left-1]:
+                while left<right and vals[left]==vals[left-1]:
                     left+=1
 
-                while left<right and values[right]==values[right+1]:
+                while left<right and vals[right]==vals[right+1]:
                     right-=1
 
-            elif total>t_sum:
+            elif total>t:
 
                 right-=1
 
@@ -53,9 +54,10 @@ def solve()->None:
     print(ans_n)
 
     if ans_n>0:
-        for c in ans:
+        for a in ans:
+            print(*a)
 
-            print(*c)
+
 
 
 

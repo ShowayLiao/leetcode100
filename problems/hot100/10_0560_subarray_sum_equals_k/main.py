@@ -7,29 +7,33 @@ def solve()->None:
     if not data:
         return
 
+    prefix = {0:1}
+
+    n = int(data[0])
+
     t = int(data[1])
 
-    values = list(map(int,data[2:]))
+    vals = list(map(int,data[2:]))
 
-    sum = 0
-
-    prefix = {0:1}
+    total = 0
 
     ans = 0
 
-    for v in values:
+    for i,v in enumerate(vals):
 
-        sum+=v
+        total+=v
 
-        pre = prefix.get(sum-t,None)
+        ib = prefix.get(total-t,None)
 
-        if pre is not None:
-            ans+=pre
+        if ib is not None:
+            ans+=ib
 
-        prefix[sum] = prefix.get(sum,0)+1
+        prefix[total] = prefix.get(total,0)+1
 
 
     print(ans)
+            
+
 
         
 

@@ -12,22 +12,24 @@ def solve()->None:
 
     seen = set()
 
-    start = 0
+    left = 0
 
-    ans = 0
+    lenth = 0
 
-    for c in s:
+    for i,c in enumerate(s):
 
         while c in seen:
 
-            seen.remove(s[start])
-            start+=1
+            seen.remove(s[left])
+            left+=1
 
         seen.add(c)
 
-        ans = max(len(seen),ans)
+        lenth = max(lenth,i-left+1)
 
-    print(ans)
+
+    print(lenth)
+    
 
 
 
