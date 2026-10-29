@@ -7,34 +7,34 @@ def solve()->None:
     if not data:
         return
 
-    nums = list(map(int,data[1:]))
-
     n = int(data[0])
 
     if n==0:
         print(0)
         return
 
+    vs = list(map(int,data[1:]))
 
-    uni = list(set(nums))
+    uni = list(set(vs))
 
-    ans =1
+    bl = 1
 
-    for d in nums:
+    for v in vs:
 
-        if d-1 in uni:
+        if v-1 in uni:
             continue
 
-        count = 1
+        l = 1
 
-        while d+1 in uni:
-            count+=1
-            d+=1
-            ans = max(ans,count)
+        while v+1 in uni:
 
+            l+=1
 
-    print(ans)
+            bl = max(bl,l)
 
+            v+=1
+
+    print(bl)
     
 
 

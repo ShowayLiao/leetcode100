@@ -11,21 +11,22 @@ def solve()->None:
 
     t = int(data[1])
 
-    num_dict = {}
+    vals = list(map(int,data[2:]))
 
-    for i,d in enumerate(data[2:]):
+    total_dict = {}
 
-        d = int(d)
+    for i,v in enumerate(vals):
 
-        i_b = num_dict.get(t-d,None)
+        ib = total_dict.get(t-v,None)
 
-        if i_b is not None:
-            print(i_b,i)
+        if ib is not None:
+            print(ib,i)
             return
 
 
-        num_dict[d] = i
+        total_dict[v] = i
 
+    
     
 
 

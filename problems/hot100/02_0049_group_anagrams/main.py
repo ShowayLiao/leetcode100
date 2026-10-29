@@ -9,13 +9,9 @@ def solve()->None:
     if not data:
         return
 
-    n = int(data[0])
-
-    if n==0:
-        print(0)
-        return
-
     ch_dict = {}
+
+    
 
     for c in data[1:]:
 
@@ -24,18 +20,19 @@ def solve()->None:
         ch_dict["".join(sorted(c))].append(c)
 
 
-    ch_list = []
-
-    for c in ch_dict.values():
-
-        ch_list.append(sorted(c))
+    ch_list = [sorted(c) for c in ch_dict.values()]
 
     ch_list = sorted(ch_list)
 
-    print(len(ch_list))
+    n_ans = len(ch_list)
 
-    for c in ch_list:
-        print(*c)
+    print(n_ans)
+
+    if n_ans>0:
+
+        for c in ch_list:
+            print(*c)
+
 
     
 
