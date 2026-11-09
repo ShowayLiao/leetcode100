@@ -20,20 +20,17 @@ def build_tree(data:list)->TreeNode:
 
     index = 1
 
-    while index<len(data) and queue:
+    while queue and index<len(data):
 
         node = queue.popleft()
 
-        if data[index]!=b"null":
-
+        if data[index]!="null":
             node.left = TreeNode(int(data[index]))
             queue.append(node.left)
 
         index+=1
 
-
-        if index<len(data) and data[index]!=b"null":
-
+        if index<len(data) and data[index]!="null":
             node.right = TreeNode(int(data[index]))
             queue.append(node.right)
 
@@ -41,21 +38,18 @@ def build_tree(data:list)->TreeNode:
 
     return root
 
-
 def solve()->None:
 
-    data = sys.stdin.buffer.read().split()
+    data = sys.stdin.read().split()
 
     if not data:
         return
-
-    n = int(data[0])
 
     root = build_tree(data[1:])
 
     stack = [(root,False)]
 
-    lenth = {}
+    lenth= {}
 
     ans = 0
 
@@ -65,6 +59,7 @@ def solve()->None:
 
         if node is None:
             continue
+
 
         if not visit:
 
@@ -83,7 +78,6 @@ def solve()->None:
 
 
     print(ans)
-
             
     
 

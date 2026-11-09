@@ -13,37 +13,20 @@ def solve()->None:
 
     vals = list(map(int,data[2:]))
 
-    total_dict = {}
+    sum_dict = {}
 
     for i,v in enumerate(vals):
 
-        ib = total_dict.get(t-v,None)
+        i_b = sum_dict.get(t-v,None)
 
-        if ib is not None:
-            print(ib,i)
+        if i_b is not None:
+            print(i_b,i)
+
             return
 
-
-        total_dict[v] = i
-
-    
-    
-
+        sum_dict[v] = i
 
     
-
-    
-
-
-    
-
-
-
-
-    
-    
-
-
 
 
 

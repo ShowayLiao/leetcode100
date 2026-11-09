@@ -11,14 +11,12 @@ class TreeNode:
 
 def build_tree(pdata:list,idata:list,n:int)->TreeNode:
 
-    if not pdata or not idata:
+    if not pdata:
         return
-
-    root = None
 
     stack = [(0,n,0,n,None,None)]
 
-    i_pos = {int(value):i for i,value in enumerate(idata)}
+    i_dict = {int(v):i for i,v in enumerate(idata)}
 
     while stack:
 
@@ -34,25 +32,27 @@ def build_tree(pdata:list,idata:list,n:int)->TreeNode:
 
         elif side == "left":
             parent.left = node
-
         else:
             parent.right = node
 
+        mid = i_dict[int(pdata[pl])]
 
-        mid = i_pos[node.val]
+        left_num = mid-il
 
-        left_n = mid-il
+        stack.append((
+            pl+1,pl+1+left_num,il,mid,node,"left"
+        ))
 
-        stack.append((pl+1,pl+1+left_n,il,mid,node,"left"))
-        stack.append((pl+1+left_n,pr,mid+1,ir,node,"right"))
+        stack.append((
 
+            pl+1+left_num,pr,mid+1,ir,node,"right"
+        ))
 
-    return root 
+    return root
 
+def solve():
 
-def solve()->None:
-
-    data = sys.stdin.buffer.read().split()
+    data = sys.stdin.read().split()
 
     if not data:
         return
@@ -71,10 +71,9 @@ def solve()->None:
 
         for _ in range(level_size):
 
-            node  = queue.popleft()
+            node = queue.popleft()
 
             if node:
-
                 out.append(node.val)
 
             else:
@@ -82,20 +81,14 @@ def solve()->None:
                 out.append("null")
                 continue
 
-
             queue.append(node.left)
             queue.append(node.right)
 
 
     while out and out[-1]=="null":
         out.pop()
-    
 
-    print(*out)
-
-
-
-    
+    print(*out)    
 
 
 if __name__ == "__main__":

@@ -9,32 +9,28 @@ def solve()->None:
     if not data:
         return
 
-    ch_dict = {}
+    n = int(data[0])
 
-    
+    if n==0:
+        print(0)
+        return
+
+    c_dict = {}
 
     for c in data[1:]:
 
-        ch_dict["".join(sorted(c))] = ch_dict.get("".join(sorted(c)),[])
+        c_dict["".join(sorted(c))] = c_dict.get("".join(sorted(c)),[])
+        c_dict["".join(sorted(c))].append(c)
 
-        ch_dict["".join(sorted(c))].append(c)
+    c_list = [sorted(d) for d in c_dict.values()]
 
+    c_list = sorted(c_list)
 
-    ch_list = [sorted(c) for c in ch_dict.values()]
+    print(len(c_list))
 
-    ch_list = sorted(ch_list)
-
-    n_ans = len(ch_list)
-
-    print(n_ans)
-
-    if n_ans>0:
-
-        for c in ch_list:
-            print(*c)
-
-
-    
+    for c in c_list:
+        print(*c)
+        
 
 
 

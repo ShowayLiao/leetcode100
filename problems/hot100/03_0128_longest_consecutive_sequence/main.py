@@ -13,29 +13,25 @@ def solve()->None:
         print(0)
         return
 
-    vs = list(map(int,data[1:]))
+    vals = list(map(int,data[1:]))
 
-    uni = list(set(vs))
+    uni = set(vals)
 
-    bl = 1
+    best = 1
 
-    for v in vs:
+    for v in vals:
 
         if v-1 in uni:
             continue
 
-        l = 1
+        lenth = 1
 
         while v+1 in uni:
-
-            l+=1
-
-            bl = max(bl,l)
-
+            lenth+=1
             v+=1
+            best = max(best,lenth)
 
-    print(bl)
-    
+    print(best) 
 
 
 
